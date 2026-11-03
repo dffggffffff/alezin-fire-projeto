@@ -1,0 +1,20 @@
+name: Build APK
+on: [push, workflow_dispatch]
+jobs:
+  buildAndroid:
+    name: Build Android APK
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Build APK
+        uses: a-bentofreire/unity-cloud-build@v1.0.4
+        with:
+          projectPath: .
+          unityVersion: 2022.3.12f1
+          target: Android
+      - name: Upload APK
+        uses: actions/upload-artifact@v4
+        with:
+          name: meu-jogo-alezin
+          path: build/
